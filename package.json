@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "next": "12.1.6",
+    "open-terms-archive": "git+https://git@github.com/ambanum/OpenTermsArchive.git#expose_fetch",
     "react": "18.1.0",
     "react-dom": "18.1.0"
   },
