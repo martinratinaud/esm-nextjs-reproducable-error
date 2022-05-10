@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "ts-node --project tsconfig.server.json server/index.ts",
+    "dev:custom": "ts-node --project tsconfig.server.json server/index.ts",
+    "dev:custom:cjs": "ts-node --project tsconfig.server.json server/index.cjs.ts",
+    "dev:custom:es": "ts-node --project tsconfig.server.json server/index.es.ts",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
