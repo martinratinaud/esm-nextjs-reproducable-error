@@ -63,3 +63,14 @@ cd OpenTermsArchive && npm link
 cd esm-nextjs-reproducable-error && npm link open-terms-archive
 ```
 
+### Import in javascript
+
+Launch `yarn run dev:custom:js`
+
+get the following error
+
+```
+Cannot use import statement outside a module
+```
+
+See details in `server/index.js`
