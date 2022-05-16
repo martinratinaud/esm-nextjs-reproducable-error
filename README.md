@@ -74,3 +74,26 @@ Cannot use import statement outside a module
 ```
 
 See details in `server/index.js`
+
+### Import in module javascript
+
+Launch `yarn run dev:custom:mjs`
+
+It works fine but if everything is in .mjs
+
+But if you try to re-include a ts file, you end up with
+
+```
+TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts" for /Users/martin/Workspace/ambanum/esm-next-reproduced-error/server/includes/test.ts
+    at new NodeError (node:internal/errors:371:5)
+    at Object.file: (node:internal/modules/esm/get_format:72:15)
+    at defaultGetFormat (node:internal/modules/esm/get_format:85:38)
+    at defaultLoad (node:internal/modules/esm/load:13:42)
+    at ESMLoader.load (node:internal/modules/esm/loader:303:26)
+    at ESMLoader.moduleProvider (node:internal/modules/esm/loader:230:58)
+    at new ModuleJob (node:internal/modules/esm/module_job:63:26)
+    at ESMLoader.getModuleJob (node:internal/modules/esm/loader:244:11)
+    at async ModuleWrap.<anonymous> (node:internal/modules/esm/module_job:78:21)
+    at async Promise.all (index 1) {
+  code: 'ERR_UNKNOWN_FILE_EXTENSION'
+  ```

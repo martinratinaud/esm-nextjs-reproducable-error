@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "dev:custom:mjs": "ts-node server/index.mjs",
     "dev:custom:js": "ts-node server/index.js",
     "dev:custom:cjs": "ts-node --project tsconfig.server.json server/index.cjs.ts",
     "dev:custom:es": "ts-node --project tsconfig.server.json server/index.es.ts",
