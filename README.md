@@ -97,3 +97,12 @@ TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts" for /Users/
     at async Promise.all (index 1) {
   code: 'ERR_UNKNOWN_FILE_EXTENSION'
   ```
+### Import in typescript file
+
+Launch `yarn run dev:custom:ts`
+
+get the following error
+
+```
+Error [ERR_REQUIRE_ESM]: require() of ES Module [...] not supported
+```

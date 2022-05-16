@@ -4,9 +4,5 @@
       "module": "commonjs",
       "sourceMap": true,
       "outDir": "bin/"
-  },
-  "include": [
-      "server/**/*.ts",
-      "typings/**/*.ts"
-  ]
+  }
 }
