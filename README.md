@@ -1,34 +1,65 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ESM - NextJS reproducable error
 
-## Getting Started
+This repo has been created using This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-First, run the development server:
+It aims at reproducing errors when trying to include a ES module inside a custom server implementation in NextJS with Typescript
 
-```bash
-npm run dev
-# or
-yarn dev
+## Install
+
+### ESM library
+
+First we need to install the ESM library that causes problems when included in NextJs.
+And also put it on the correct branch
+
+```
+git clone git@github.com:ambanum/OpenTermsArchive.git
+cd OpenTermsArchive
+git checkout expose_fetch
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This branch uses the package.json functionality `exports` to export simple functions.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### NextJs project using ESM library
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```
+git clone git@github.com:martinratinaud/esm-nextjs-reproducable-error.git
+cd esm-nextjs-reproducable-error
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Testing
 
-## Learn More
+ESM library included is exposing the following
 
-To learn more about Next.js, take a look at the following resources:
+```
+ "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./cjs/fetcher": "./src/exports/fetcher.cjs.js",
+    "./es/fetcher": "./src/exports/fetcher.es.js",
+    "./fetcher": "./src/exports/fetcher.mjs",
+    "./fetcher.js": "./src/exports/fetcher.js"
+  },
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+It should thus be importable through this
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+import fetcher from 'open-terms-archive'
+import fetcher from 'open-terms-archive/cjs/fetcher'
+import fetcher from 'open-terms-archive/es/fetcher'
+import fetcher from 'open-terms-archive/fetcher'
+import fetcher from 'open-terms-archive/fetcher.js'
+```
 
-## Deploy on Vercel
+I created several commands to test all thos configurations which none actually worked.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+In each of the `server/*` files, you can comment/uncomment lines to test several kinds of imports which none actually worked for me.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**NOTE**
+In case you want to test on your local, you can use `npm link` this way
+
+```
+cd OpenTermsArchive && npm link
+cd esm-nextjs-reproducable-error && npm link open-terms-archive
+```
+
